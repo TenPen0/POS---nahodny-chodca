@@ -1,0 +1,3 @@
+/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/POS.dir
+/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/edit_cache.dir
+/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/rebuild_cache.dir

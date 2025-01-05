@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="2316f715-0d3f-4725-a6ac-6e347308a088" name="client" defaultType="TOOL">
+      <configuration id="40b09484-e887-4252-8e8d-bf548526c2c2" name="client" toolchainName="frios2" />
+    </target>
+  </component>
+</project>
