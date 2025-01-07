@@ -10,20 +10,36 @@
  #include <semaphore.h>
 #include "shm.h"
 
-typedef struct synBuffer{
-    buffer *buff_;
+typedef struct synSimBuffer{
+    simBuffer *buff_;
     int buff_fd_;
     sem_t *mut_pc_;
     //sem_t *sem_produce_;
     sem_t *sem_consume_;
-} synBuffer;
+} synSimBuffer;
 
 void syn_shm_buffer_init(shared_names *names);
 void syn_shm_buffer_destroy(shared_names *names);
-void syn_shm_buffer_open(synBuffer *this, shared_names *names);
-void syn_shm_buffer_close(synBuffer *this);
-void syn_shm_buffer_push(synBuffer *this, const simulationState *input);
-void syn_shm_buffer_pop(synBuffer *this, simulationState *output);
+
+void syn_shm_sim_buffer_open(synSimBuffer *this, shared_names *names);
+void syn_shm_sim_buffer_close(synSimBuffer *this);
+void syn_shm_sim_buffer_push(synSimBuffer *this, const simulationState *input);
+void syn_shm_sim_buffer_pop(synSimBuffer *this, simulationState *output);
+void syn_shm_sim_buffer_read(synSimBuffer *this, simulationState *output);
+
+typedef struct synInputBuffer{
+    inputBuffer *buff_;
+    int buff_fd_;
+    sem_t *mut_pc_;
+    //sem_t *sem_produce_;
+    sem_t *sem_consume_;
+} synInputBuffer;
+
+void syn_shm_input_buffer_open(synInputBuffer *this, shared_names *names);
+void syn_shm_input_buffer_close(synInputBuffer *this);
+void syn_shm_input_buffer_push(synInputBuffer *this, const simulationMode *input);
+void syn_shm_input_buffer_pop(synInputBuffer *this, simulationMode *output);
+void syn_shm_input_buffer_read(synInputBuffer *this, simulationMode *input);
 
 
 #endif //SYNBUFFER_H

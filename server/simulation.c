@@ -22,7 +22,7 @@ void initSimData(simulationData* simData, char * stringData) {
     //kumulativne
     simData->down = simData->down + simData->up;
     simData->left = simData->left + simData->down;
-    simData->right = simData->right - simData->left;
+    simData->right = simData->right + simData->left;
 
     simData->centerX = simData->width / 2;
     simData->centerY = simData->height / 2;

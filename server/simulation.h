@@ -31,6 +31,14 @@ typedef struct simulationState {
     bool ended;
 }simulationState;
 
+typedef enum simulationMode {
+    average,
+    probability,
+    interactive,
+    paused,
+    stop
+} simulationMode;
+
 void initSimData(simulationData* simData, char * stringData);
 void initSimState(simulationState* simState, simulationData* simData);
 void destroySimState(simulationState * simState);

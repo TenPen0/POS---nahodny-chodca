@@ -6,34 +6,17 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <stdbool.h>
-#include <stdlib.h>
 
 #include "../shm/synBuffer.h"
 #include "stdio.h"
+#include <sys/wait.h>
+#include <pthread.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/wait.h>
 
-void drawBoard(int height, int width, simulationState * simState) {
-    for (int x = 0; x < (width*3)+1; x++) {
-        printf("-");
-    }
-    printf("\n");
-    for (int y = 0; y < height; y++) {
-        printf("|");
-        for (int x = 0; x < width; x++) {
-            printf("%2d|",simState->tile[x][y]);
-        }
-        printf("\n");
-        for (int x = 0; x < (width*3)+1; x++) {
-            printf("-");
-        }
-        printf("\n");
-    }
-
-    printf("\n\n");
-}
+#include "drawThread.h"
+#include "inputThread.h"
 
 void drawMenu() {
     printf("Nova Simulacia.............1\n");
@@ -42,42 +25,9 @@ void drawMenu() {
     printf("Koniec.....................4\n");
 }
 
-int menuSelect() {
-    while (true) {
-        char inputBuff[32];
-        scanf("%s",&inputBuff);
-        if (strlen(inputBuff) == 1) {
-            if (isdigit(inputBuff[0])) {
-                int choice = atoi(inputBuff);
-                if (choice >= 1 && choice <= 4) {
-                    return choice;
-                }
-            }
-        }
-        printf("Chybna volba, zadaj znova\n");
-    }
-}
 
-void boardThread(shared_names * names) {
 
-    synBuffer buffer;
-    syn_shm_buffer_open(&buffer, names);
-
-    simulationState simState;
-
-    while (true) {
-        syn_shm_buffer_pop(&buffer, &simState);
-        if (simState.ended) {
-            break;
-        }
-        drawBoard(5,7, &simState);
-        usleep(500000);
-    }
-
-    syn_shm_buffer_close(&buffer);
-}
-
-void startSimulation(shared_names * names, const char * suffix) {
+void startSimulation(const char * suffix) {
     /*int width = -1;
     int height = -1;
     int replications = -1;
@@ -111,6 +61,23 @@ void startSimulation(shared_names * names, const char * suffix) {
 */
     char specs[]= "7 5 10 25 25 25 25 10 vysledok.txt";
 
+    shared_names simNames;
+    simNames.shm_name_ = add_suffix("S-SHM", suffix);
+    simNames.mut_pc_ = add_suffix("S-MUT-PC", suffix);
+    simNames.sem_produce_ = add_suffix("S-SEM-P", suffix);
+    simNames.sem_consume_ = add_suffix("S-SEM-C", suffix);
+    shm_init(&simNames, sizeof(simBuffer));
+    syn_shm_buffer_init(&simNames);
+
+    shared_names inputNames;
+    inputNames.shm_name_ = add_suffix("I-SHM", suffix);
+    inputNames.mut_pc_ = add_suffix("I-MUT-PC", suffix);
+    inputNames.sem_produce_ = add_suffix("I-SEM-P", suffix);
+    inputNames.sem_consume_ = add_suffix("I-SEM-C", suffix);
+    shm_init(&inputNames, sizeof(inputBuffer));
+    syn_shm_buffer_init(&inputNames);
+
+
     const pid_t pid = fork();
 
     if (pid < 0) {
@@ -119,15 +86,39 @@ void startSimulation(shared_names * names, const char * suffix) {
     }
 
     if (pid == 0) {
-        // vykoná detský proces
-        const char * args[] = {"./server", suffix, specs, NULL};
+        //detský proces - server
+        char * args[] = {"./server", suffix, specs, NULL};
         execvp(args[0],args);
         printf("Chyba exec: %s\n", strerror(errno));
 
     } else {
-        // vykoná rodičovský proces
-        boardThread(names);
+        //rodičovský proces - client
+
+        inputThreadData iData;
+        inputThreadInit(&iData, &inputNames, &simNames);
+        pthread_t inputThreadID;
+        pthread_create(&inputThreadID, NULL, &inputThread, &iData);
+
+        drawThreadData dData;
+        drawThreadDataInit(&dData, &simNames);
+        pthread_t drawThreadId;
+        pthread_create(&drawThreadId, NULL, &drawThread, &dData);
+
+        pthread_join(drawThreadId, NULL);
+        pthread_cancel(inputThreadID);
+        int status;
+        wait(&status);
+
+        shm_destroy(&simNames);
+        syn_shm_buffer_destroy(&simNames);
+        shm_destroy(&inputNames);
+        syn_shm_buffer_destroy(&inputNames);
+
+        destroy_names(&inputNames);
+        destroy_names(&simNames);
     }
+
+
 }
 
 void connectToSimulation() {
@@ -137,20 +128,13 @@ void connectToSimulation() {
 
 
 int main(int argc, const char * argv[]) {
-    shared_names names;
-    names.shm_name_ = add_suffix("SHM", argv[1]);
-    names.mut_pc_ = add_suffix("MUT-PC", argv[1]);
-    names.sem_produce_ = add_suffix("SEM-P", argv[1]);
-    names.sem_consume_ = add_suffix("SEM-C", argv[1]);
 
-    shm_init(&names);
-    syn_shm_buffer_init(&names);
 
     drawMenu();
-    int choice = menuSelect();
+    int choice = readInt(1,4);
     switch (choice) {
         case 1:
-            startSimulation(&names, argv[1]);
+            startSimulation(argv[1]);
             break;
         case 2:
             connectToSimulation();
@@ -163,9 +147,4 @@ int main(int argc, const char * argv[]) {
 
     int status;
     wait(&status);
-    shm_destroy(&names);
-    syn_shm_buffer_destroy(&names);
-
-
-    destroy_names(&names);
 }

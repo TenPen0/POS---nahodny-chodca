@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 
-void buffInit(buffer * this) {
+void simBuffInit(simBuffer * this) {
     //this->cislo = calloc(BUFF_SIZE, sizeof(int));
     this->capacity = BUFF_SIZE;
     this->size = 0;
@@ -14,14 +14,14 @@ void buffInit(buffer * this) {
     this->out = 0;
 }
 
-void buffPush(buffer * this, const simulationState * in) {
+void simBuffPush(simBuffer * this, const simulationState * in) {
     this->simState = *in;
     this->size=1;
     /*this->size++;
     this->in %= this->capacity;*/
 }
 
-void buffPop(buffer * this, simulationState * out) {
+void simBuffPop(simBuffer * this, simulationState * out) {
     *out = this->simState;
     this->size=0;
     /**out = this->cislo[this->out++];
@@ -29,7 +29,30 @@ void buffPop(buffer * this, simulationState * out) {
     this->out %= this->capacity;*/
 }
 
-void destroyBuff(buffer * this){
+void destroySimBuff(simBuffer * this){
     //free(this->cislo);
     //this->cislo = NULL;
+}
+
+void simBuffRead(simBuffer *this, simulationState *out) {
+    *out = this->simState;
+}
+
+void inputBuffInit(inputBuffer *this) {
+    this->simMode = average;
+    this->size = 0;
+}
+
+void inputBuffPush(inputBuffer *this, const simulationMode *in) {
+    this->simMode = *in;
+    this->size=1;
+}
+
+void inputBuffPop(inputBuffer *this, simulationMode *out) {
+    *out = this->simMode;
+    this->size=0;
+}
+
+void inputBuffRead(inputBuffer * this, simulationMode *out) {
+    *out = this->simMode;
 }

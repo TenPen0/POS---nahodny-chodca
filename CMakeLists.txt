@@ -15,7 +15,12 @@ add_executable(client
         client/client.h
         shm/names.c
         server/simulation.c
-        server/simulation.h)
+        server/simulation.h
+        client/drawThread.c
+        client/drawThread.h
+        client/inputThread.c
+        client/inputThread.h
+)
 
 add_executable(server server/server.c
         server/server.h
@@ -28,4 +33,5 @@ add_executable(server server/server.c
         shm/synBuffer.h
         shm/names.c
         server/simulation.c
-        server/simulation.h)
+        server/simulation.h
+)
