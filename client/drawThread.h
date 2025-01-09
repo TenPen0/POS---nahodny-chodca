@@ -5,6 +5,8 @@
 #ifndef DRAWTHREAD_H
 #define DRAWTHREAD_H
 
+#include <stdio.h>
+
 #include "../shm/names.h"
 #include "../server/simulation.h"
 
@@ -13,7 +15,9 @@ typedef struct drawThreadData{
 } drawThreadData;
 
 void * drawThread(void * args);
-void drawBoard(int height, int width, simulationState * simState);
 void drawThreadDataInit(drawThreadData * this, shared_names * simNames);
+void drawBoard(int height, int width, simulationState * simState, void(*drawTile)(simulationState*, int, int, FILE*), FILE * file);
+void drawAverageTile(simulationState * simState,int x, int y, FILE * file);
+void drawProbabilityTile(simulationState * simState, int x, int y, FILE * file);
 
 #endif //DRAWTHREAD_H

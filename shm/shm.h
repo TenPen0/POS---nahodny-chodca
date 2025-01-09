@@ -9,7 +9,8 @@
 #include "buffer.h"
 
 
-void shm_init(shared_names *names, int size);
+void shm_sim_init(shared_names *names);
+void shm_input_init(shared_names *names);
 void shm_destroy(shared_names *names);
 
 void shm_sim_buffer_open(shared_names *names, simBuffer **out_buff, int *out_fd_shm);

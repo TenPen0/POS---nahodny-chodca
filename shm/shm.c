@@ -9,10 +9,11 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <semaphore.h>
 #include <unistd.h>
 
 
-void shm_init(shared_names *names, int sizeOfBuff) {
+void shm_sim_init(shared_names *names) {
     const int fd_shm = shm_open(names->shm_name_, O_RDWR | O_CREAT | O_EXCL,S_IRUSR | S_IWUSR);
     if (fd_shm ==-1) {
         perror("Failed to create shared memory");
@@ -22,10 +23,26 @@ void shm_init(shared_names *names, int sizeOfBuff) {
         perror("Failed to truncate shared memory");
         exit(EXIT_FAILURE);
     }
-    simBuffer *buff = mmap(NULL, sizeOfBuff /*sizeof(simBuffer)*/, PROT_READ | PROT_WRITE,
+    simBuffer *buff = mmap(NULL, sizeof(simBuffer), PROT_READ | PROT_WRITE,
     MAP_SHARED, fd_shm, 0);
     simBuffInit(buff);
     shm_sim_buffer_close(fd_shm, buff);
+}
+
+void shm_input_init(shared_names *names) {
+    const int fd_shm = shm_open(names->shm_name_, O_RDWR | O_CREAT | O_EXCL,S_IRUSR | S_IWUSR);
+    if (fd_shm ==-1) {
+        perror("Failed to create shared memory");
+        exit(EXIT_FAILURE);
+    }
+    if (ftruncate(fd_shm, sizeof(simBuffer)) ==-1) {
+        perror("Failed to truncate shared memory");
+        exit(EXIT_FAILURE);
+    }
+    inputBuffer *buff = mmap(NULL,sizeof(inputBuffer), PROT_READ | PROT_WRITE,
+    MAP_SHARED, fd_shm, 0);
+    inputBuffInit(buff);
+    shm_input_buffer_close(fd_shm, buff);
 }
 
 void shm_destroy(shared_names *names) {
@@ -59,6 +76,7 @@ void shm_sim_buffer_close(int fd_shm, simBuffer *buff) {
         perror("Failed to close shared memory");
         exit(EXIT_FAILURE);
     }
+
 }
 
 void shm_input_buffer_open(shared_names *names, inputBuffer **out_buff, int *out_fd_shm) {

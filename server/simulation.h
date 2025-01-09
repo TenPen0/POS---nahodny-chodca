@@ -5,8 +5,8 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#define MAX_WIDTH 10
-#define MAX_HEIGHT 10
+#define MAX_WIDTH 23
+#define MAX_HEIGHT 17
 #include <stdbool.h>
 
 typedef struct simulationData {
@@ -24,13 +24,6 @@ typedef struct simulationData {
     int centerY;
 }simulationData;
 
-typedef struct simulationState {
-    int tile[MAX_WIDTH][MAX_HEIGHT];
-    int currentX;
-    int currentY;
-    bool ended;
-}simulationState;
-
 typedef enum simulationMode {
     average,
     probability,
@@ -38,6 +31,25 @@ typedef enum simulationMode {
     paused,
     stop
 } simulationMode;
+
+typedef struct tile {
+    int steps;
+    int successfull;
+}tile;
+
+typedef struct coordinations{
+    int x;
+    int y;
+} coordinates;
+
+typedef struct simulationState {
+    tile tiles[MAX_WIDTH][MAX_HEIGHT];
+    int replication;
+    coordinates currentCoor;
+    simulationMode mode;
+    bool ended;
+}simulationState;
+
 
 void initSimData(simulationData* simData, char * stringData);
 void initSimState(simulationState* simState, simulationData* simData);

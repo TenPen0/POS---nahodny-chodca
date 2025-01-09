@@ -5,11 +5,11 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#define BUFF_SIZE 1
+#define BUFF_SIZE 2
 #include "../server/simulation.h"
 
 typedef struct simBuffer{
-    simulationState simState;
+    simulationState simState[BUFF_SIZE];
     int capacity;
     int size;
     int in;
@@ -20,7 +20,7 @@ void simBuffInit(simBuffer * this);
 void simBuffPush(simBuffer * this, const simulationState * in);
 void simBuffPop(simBuffer * this, simulationState * out);
 void destroySimBuff(simBuffer * this);
-void simBuffRead(simBuffer * this, simulationState * out);
+bool simBuffReadEnded(simBuffer * this);
 
 typedef struct inputBuffer{
     enum simulationMode simMode;
