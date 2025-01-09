@@ -34,4 +34,8 @@ add_executable(server server/server.c
         shm/names.c
         server/simulation.c
         server/simulation.h
+        client/drawThread.h
+        client/drawThread.c
+        server/simThread.c
+        server/simThread.h
 )

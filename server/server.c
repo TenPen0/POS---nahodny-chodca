@@ -12,110 +12,132 @@
 #include "../shm/names.h"
 #include "../shm/synBuffer.h"
 #include "simulation.h"
+#include "../client/drawThread.h"
 
 
-bool checkCenter(simulationData * simData, simulationState * simState) {
-    if (simState->currentY == simData->centerY && simState->currentX == simData->centerX) {
+bool checkCenter(simulationData * simData, coordinates * currentCoor) {
+    if (currentCoor->y == simData->centerY && currentCoor->x == simData->centerX) {
         return true;
     } else {
         return false;
     }
 }
 
-void moveUp(simulationData* simData, simulationState * simState, int initialX, int initialY) {
-    if (simState->currentY > 0) {
-        simState->currentY--;
+void moveUp(coordinates * initialCoor, coordinates * currentCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT]) {
+    if (currentCoor->y > 0) {
+        currentCoor->y--;
     }
-    simState->tile[initialX][initialY]++;
+    (*tiles)[initialCoor->x][initialCoor->y].steps++;
 }
 
-void moveDown(simulationData* simData, simulationState * simState, int initialX, int initialY) {
-    if (simState->currentY < simData->height - 1) {
-        simState->currentY++;
+void moveDown(coordinates * initialCoor, coordinates * currentCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT], simulationData* simData) {
+    if (currentCoor->y < simData->height - 1) {
+        currentCoor->y++;
     }
-    simState->tile[initialX][initialY]++;
+    (*tiles)[initialCoor->x][initialCoor->y].steps++;
 }
 
-void moveLeft(simulationData* simData, simulationState * simState, int initialX, int initialY) {
-    if (simState->currentX > 0) {
-        simState->currentX--;
+void moveLeft(coordinates * initialCoor, coordinates * currentCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT]) {
+    if (currentCoor->x > 0) {
+        currentCoor->x--;
     }
-    simState->tile[initialX][initialY]++;
+    (*tiles)[initialCoor->x][initialCoor->y].steps++;
 }
 
-void moveRight(simulationData* simData, simulationState * simState, int initialX, int initialY) {
-    if (simState->currentX < simData->width - 1) {
-        simState->currentX++;
+void moveRight(coordinates * initialCoor, coordinates * currentCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT], simulationData* simData) {
+    if (currentCoor->x < simData->width - 1) {
+        currentCoor->x++;
     }
-    simState->tile[initialX][initialY]++;
+    (*tiles)[initialCoor->x][initialCoor->y].steps++;
 }
 
-void runTile(simulationData * simData, simulationState * simState, int initialX, int initialY) {
-    simState->currentX = initialX;
-    simState->currentY = initialY;
+void runTile(simulationData * simData, coordinates *initialCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT]) {
+    coordinates currentCoor = {initialCoor->x, initialCoor->y};
     for (int i = 0; i < simData->maxSteps; i++) {
         int direction = rand() % 100;
         if (direction < simData->up) {
-            moveUp(simData, simState, initialX, initialY);
+            moveUp(initialCoor, &currentCoor, tiles);
         } else if (direction < simData->down) {
-            moveDown(simData, simState, initialX, initialY);
+            moveDown(initialCoor, &currentCoor, tiles, simData);
         } else if (direction < simData->left) {
-            moveLeft(simData, simState, initialX, initialY);
+            moveLeft(initialCoor, &currentCoor, tiles);
         } else if (direction < simData->right) {
-            moveRight(simData, simState, initialX, initialY);
+            moveRight(initialCoor, &currentCoor, tiles, simData);
         }
 
-        if (checkCenter(simData, simState)) {
+        if (checkCenter(simData, &currentCoor)) {
+            (*tiles)[initialCoor->x][initialCoor->y].successfull++;
             return;
         }
     }
+    //nedosiel do ciela
+    (*tiles)[initialCoor->x][initialCoor->y].steps -= simData->maxSteps;
 }
 
-void runTileInteractive(simulationData * simData, simulationState * simState, int initialX, int initialY, synSimBuffer * simBuff) {
-    simState->currentX = initialX;
-    simState->currentY = initialY;
+void runTileInteractive(simulationData * simData, simulationState * simState, coordinates *initialCoor, synSimBuffer * simBuff, synInputBuffer * inputBuff) {
+    simState->currentCoor = *initialCoor;
     for (int i = 0; i < simData->maxSteps; i++) {
+        syn_shm_input_buffer_read(inputBuff, &simState->mode);
         int direction = rand() % 100;
         if (direction < simData->up) {
-            moveUp(simData, simState, initialX, initialY);
+            moveUp(initialCoor, &simState->currentCoor, &simState->tiles);
         } else if (direction < simData->down) {
-            moveDown(simData, simState, initialX, initialY);
+            moveDown(initialCoor, &simState->currentCoor, &simState->tiles, simData);
         } else if (direction < simData->left) {
-            moveLeft(simData, simState, initialX, initialY);
+            moveLeft(initialCoor, &simState->currentCoor, &simState->tiles);
         } else if (direction < simData->right) {
-            moveRight(simData, simState, initialX, initialY);
+            moveRight(initialCoor, &simState->currentCoor, &simState->tiles, simData);
+        }
+
+        syn_shm_input_buffer_read(inputBuff, &simState->mode);
+        if (simState->mode == interactive) {
+            if (checkCenter(simData, &simState->currentCoor)) {
+                simState->tiles[initialCoor->x][initialCoor->y].successfull++;
+                syn_shm_sim_buffer_push(simBuff, simState);
+                return;
+            }
+            syn_shm_sim_buffer_push(simBuff, simState);
+            usleep(200000);
+        } else {
+            if (checkCenter(simData, &simState->currentCoor)) {
+                simState->tiles[initialCoor->x][initialCoor->y].successfull++;
+                return;
+            }
+        }
+    }
+    //nedosiel do ciela
+    simState->tiles[initialCoor->x][initialCoor->y].steps -= simData->maxSteps;
+}
+
+void runReplication(simulationData * simData, simulationState * simState, synSimBuffer * simBuff, synInputBuffer * inputBuff) {
+    simState->replication++;
+    syn_shm_input_buffer_read(inputBuff, &simState->mode);
+    if (simState->mode == average || simState->mode == probability) {
+        int threads = simData->width / 5;
+
+        for (int y = 0; y < simData->height; y++) {
+            for (int x = 0; x < simData->width; x++) {
+                if (y == simData->centerY && x == simData->centerX) {
+                    continue;
+                }
+                coordinates initialCoor = {x,y};
+                runTile(simData, &initialCoor, &simState->tiles);
+            }
         }
         syn_shm_sim_buffer_push(simBuff, simState);
-        if (checkCenter(simData, simState)) {
-            return;
-        }
-        usleep(100000);
-    }
-}
-
-void runReplication(simulationData * simData, simulationState * simState, synSimBuffer * buff, synInputBuffer * inputBuff) {
-    simulationMode simMode;
-    syn_shm_input_buffer_read(inputBuff, &simMode);
-    if (simMode == average || simMode == probability) {
-        for (int i = 0; i < simData->height; i++) {
-            for (int j = 0; j < simData->width; j++) {
-                if (i == simData->centerY && j == simData->centerX) {
-                    continue;
-                }
-                runTile(simData, simState, j, i);
-            }
-        }
-        syn_shm_sim_buffer_push(buff, simState);
         usleep(200000);
-    } else if (simMode == interactive) {
+    } else if (simState->mode == interactive) {
         for (int i = 0; i < simData->height; i++) {
             for (int j = 0; j < simData->width; j++) {
                 if (i == simData->centerY && j == simData->centerX) {
                     continue;
                 }
-                runTileInteractive(simData, simState, j, i, buff);
+                coordinates initialCoor = {j, i};
+                runTileInteractive(simData, simState, &initialCoor, simBuff, inputBuff);
             }
         }
+    } else if (simState->mode == stop) {
+        simState->ended = true;
     }
 }
 
@@ -147,11 +169,26 @@ int main(int argc, char * argv[]) {
 
     for (int i = 0; i < simData.replications; i++) {
         runReplication(&simData, &simState, &buff, &inputBuff);
+        if (simState.ended == true) {
+            break;
+        }
     }
     simState.ended = true;
     syn_shm_sim_buffer_push(&buff, &simState);
 
+    FILE *file = fopen(simData.filePath, "w");
+    fprintf(file, "Ulozena simulacia\n");
+    fprintf(file, "%d %d %d %d\n%d %d %d %d\n%d\n",
+        simData.height, simData.width, simData.replications, simState.replication,
+        simData.up, simData.down, simData.left, simData.right,
+        simData.maxSteps);
+    drawBoard(simData.height, simData.width, &simState, &drawAverageTile, file);
+    drawBoard(simData.height, simData.width, &simState, &drawProbabilityTile, file);
+    fclose(file);
+
     syn_shm_sim_buffer_close(&buff);
+    syn_shm_input_buffer_close(&inputBuff);
     destroySimState(&simState);
     destroy_names(&names);
+    destroy_names(&inputNames);
 }

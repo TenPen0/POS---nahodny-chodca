@@ -19,10 +19,6 @@ void initSimData(simulationData* simData, char * stringData) {
         &simData->maxSteps,
         &simData->filePath);
 
-    //kumulativne
-    simData->down = simData->down + simData->up;
-    simData->left = simData->left + simData->down;
-    simData->right = simData->right + simData->left;
 
     simData->centerX = simData->width / 2;
     simData->centerY = simData->height / 2;
@@ -32,11 +28,14 @@ void initSimData(simulationData* simData, char * stringData) {
 void initSimState(simulationState* simState, simulationData* simData) {
     for (int i = 0; i < simData->width; i++) {
         for (int j = 0; j < simData->height; j++) {
-            simState->tile[i][j] = 0;
+            simState->tiles[i][j].steps = 0;
+            simState->tiles[i][j].successfull = 0;
         }
     }
-    simState->currentX = 0;
-    simState->currentY = 0;
+    simState->replication = 0;
+    simState->currentCoor.x = 0;
+    simState->currentCoor.y = 0;
+    simState->mode = average;
     simState->ended = false;
 }
 

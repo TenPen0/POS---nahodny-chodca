@@ -11,7 +11,7 @@
 
 typedef struct inputThreadData {
     shared_names * inputNames;
-    //shared_names * simNames;
+    shared_names * simNames;
 }inputThreadData;
 
 void * inputThread(void * args);
