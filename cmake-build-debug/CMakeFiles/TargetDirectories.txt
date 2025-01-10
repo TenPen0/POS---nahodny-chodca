@@ -1,3 +1,4 @@
-/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/POS.dir
-/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/edit_cache.dir
-/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/sf_CLionProjects/POS/cmake-build-debug/CMakeFiles/client.dir
+/media/sf_CLionProjects/POS/cmake-build-debug/CMakeFiles/server.dir
+/media/sf_CLionProjects/POS/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/sf_CLionProjects/POS/cmake-build-debug/CMakeFiles/rebuild_cache.dir

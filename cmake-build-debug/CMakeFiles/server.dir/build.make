@@ -83,17 +83,129 @@ CMakeFiles/server.dir/server/server.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/server/server.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/server/server.c -o CMakeFiles/server.dir/server/server.c.s
 
+CMakeFiles/server.dir/shm/buffer.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/shm/buffer.c.o: /home/kucak7/semestralka/shm/buffer.c
+CMakeFiles/server.dir/shm/buffer.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/shm/buffer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/shm/buffer.c.o -MF CMakeFiles/server.dir/shm/buffer.c.o.d -o CMakeFiles/server.dir/shm/buffer.c.o -c /home/kucak7/semestralka/shm/buffer.c
+
+CMakeFiles/server.dir/shm/buffer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/shm/buffer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/buffer.c > CMakeFiles/server.dir/shm/buffer.c.i
+
+CMakeFiles/server.dir/shm/buffer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/shm/buffer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/buffer.c -o CMakeFiles/server.dir/shm/buffer.c.s
+
+CMakeFiles/server.dir/shm/shm.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/shm/shm.c.o: /home/kucak7/semestralka/shm/shm.c
+CMakeFiles/server.dir/shm/shm.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/shm/shm.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/shm/shm.c.o -MF CMakeFiles/server.dir/shm/shm.c.o.d -o CMakeFiles/server.dir/shm/shm.c.o -c /home/kucak7/semestralka/shm/shm.c
+
+CMakeFiles/server.dir/shm/shm.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/shm/shm.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/shm.c > CMakeFiles/server.dir/shm/shm.c.i
+
+CMakeFiles/server.dir/shm/shm.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/shm/shm.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/shm.c -o CMakeFiles/server.dir/shm/shm.c.s
+
+CMakeFiles/server.dir/shm/synBuffer.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/shm/synBuffer.c.o: /home/kucak7/semestralka/shm/synBuffer.c
+CMakeFiles/server.dir/shm/synBuffer.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/server.dir/shm/synBuffer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/shm/synBuffer.c.o -MF CMakeFiles/server.dir/shm/synBuffer.c.o.d -o CMakeFiles/server.dir/shm/synBuffer.c.o -c /home/kucak7/semestralka/shm/synBuffer.c
+
+CMakeFiles/server.dir/shm/synBuffer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/shm/synBuffer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/synBuffer.c > CMakeFiles/server.dir/shm/synBuffer.c.i
+
+CMakeFiles/server.dir/shm/synBuffer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/shm/synBuffer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/synBuffer.c -o CMakeFiles/server.dir/shm/synBuffer.c.s
+
+CMakeFiles/server.dir/shm/names.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/shm/names.c.o: /home/kucak7/semestralka/shm/names.c
+CMakeFiles/server.dir/shm/names.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/server.dir/shm/names.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/shm/names.c.o -MF CMakeFiles/server.dir/shm/names.c.o.d -o CMakeFiles/server.dir/shm/names.c.o -c /home/kucak7/semestralka/shm/names.c
+
+CMakeFiles/server.dir/shm/names.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/shm/names.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/names.c > CMakeFiles/server.dir/shm/names.c.i
+
+CMakeFiles/server.dir/shm/names.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/shm/names.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/names.c -o CMakeFiles/server.dir/shm/names.c.s
+
+CMakeFiles/server.dir/server/simulation.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/server/simulation.c.o: /home/kucak7/semestralka/server/simulation.c
+CMakeFiles/server.dir/server/simulation.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/server.dir/server/simulation.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/server/simulation.c.o -MF CMakeFiles/server.dir/server/simulation.c.o.d -o CMakeFiles/server.dir/server/simulation.c.o -c /home/kucak7/semestralka/server/simulation.c
+
+CMakeFiles/server.dir/server/simulation.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/server/simulation.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/server/simulation.c > CMakeFiles/server.dir/server/simulation.c.i
+
+CMakeFiles/server.dir/server/simulation.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/server/simulation.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/server/simulation.c -o CMakeFiles/server.dir/server/simulation.c.s
+
+CMakeFiles/server.dir/client/drawThread.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/client/drawThread.c.o: /home/kucak7/semestralka/client/drawThread.c
+CMakeFiles/server.dir/client/drawThread.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/server.dir/client/drawThread.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/client/drawThread.c.o -MF CMakeFiles/server.dir/client/drawThread.c.o.d -o CMakeFiles/server.dir/client/drawThread.c.o -c /home/kucak7/semestralka/client/drawThread.c
+
+CMakeFiles/server.dir/client/drawThread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/client/drawThread.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/client/drawThread.c > CMakeFiles/server.dir/client/drawThread.c.i
+
+CMakeFiles/server.dir/client/drawThread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/client/drawThread.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/client/drawThread.c -o CMakeFiles/server.dir/client/drawThread.c.s
+
+CMakeFiles/server.dir/server/simThread.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/server/simThread.c.o: /home/kucak7/semestralka/server/simThread.c
+CMakeFiles/server.dir/server/simThread.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/server.dir/server/simThread.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/server/simThread.c.o -MF CMakeFiles/server.dir/server/simThread.c.o.d -o CMakeFiles/server.dir/server/simThread.c.o -c /home/kucak7/semestralka/server/simThread.c
+
+CMakeFiles/server.dir/server/simThread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/server/simThread.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/server/simThread.c > CMakeFiles/server.dir/server/simThread.c.i
+
+CMakeFiles/server.dir/server/simThread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/server/simThread.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/server/simThread.c -o CMakeFiles/server.dir/server/simThread.c.s
+
 # Object files for target server
 server_OBJECTS = \
-"CMakeFiles/server.dir/server/server.c.o"
+"CMakeFiles/server.dir/server/server.c.o" \
+"CMakeFiles/server.dir/shm/buffer.c.o" \
+"CMakeFiles/server.dir/shm/shm.c.o" \
+"CMakeFiles/server.dir/shm/synBuffer.c.o" \
+"CMakeFiles/server.dir/shm/names.c.o" \
+"CMakeFiles/server.dir/server/simulation.c.o" \
+"CMakeFiles/server.dir/client/drawThread.c.o" \
+"CMakeFiles/server.dir/server/simThread.c.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
 server: CMakeFiles/server.dir/server/server.c.o
+server: CMakeFiles/server.dir/shm/buffer.c.o
+server: CMakeFiles/server.dir/shm/shm.c.o
+server: CMakeFiles/server.dir/shm/synBuffer.c.o
+server: CMakeFiles/server.dir/shm/names.c.o
+server: CMakeFiles/server.dir/server/simulation.c.o
+server: CMakeFiles/server.dir/client/drawThread.c.o
+server: CMakeFiles/server.dir/server/simThread.c.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

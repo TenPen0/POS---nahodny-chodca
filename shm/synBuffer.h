@@ -40,7 +40,9 @@ void syn_shm_input_buffer_open(synInputBuffer *this, shared_names *names);
 void syn_shm_input_buffer_close(synInputBuffer *this);
 void syn_shm_input_buffer_push(synInputBuffer *this, const simulationMode *input);
 void syn_shm_input_buffer_pop(synInputBuffer *this, simulationMode *output);
-void syn_shm_input_buffer_read(synInputBuffer *this, simulationMode *input);
+//void syn_shm_input_buffer_read(synInputBuffer *this, simulationMode *input);
+bool syn_shm_input_buffer_is_available(synInputBuffer *this);
+void syn_shm_input_buffer_flush(synInputBuffer *this);
 
 
 #endif //SYNBUFFER_H

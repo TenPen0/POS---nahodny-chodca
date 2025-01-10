@@ -7,8 +7,8 @@
 #include "simulation.h"
 
 typedef struct simThreadData {
-    int startWidth;
-    int endWidth;
+    int startColumn;
+    int endColumn;
     tile (* tiles)[MAX_WIDTH][MAX_HEIGHT];
     simulationData *simData;
 } simThreadData;

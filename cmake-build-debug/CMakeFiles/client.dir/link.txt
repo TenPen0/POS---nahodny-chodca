@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/client.dir/main.c.o CMakeFiles/client.dir/shm/buffer.c.o CMakeFiles/client.dir/shm/shm.c.o CMakeFiles/client.dir/shm/synBuffer.c.o CMakeFiles/client.dir/client/client.c.o -o client 
+/usr/bin/cc -g CMakeFiles/client.dir/shm/buffer.c.o CMakeFiles/client.dir/shm/shm.c.o CMakeFiles/client.dir/shm/synBuffer.c.o CMakeFiles/client.dir/client/client.c.o CMakeFiles/client.dir/shm/names.c.o CMakeFiles/client.dir/server/simulation.c.o CMakeFiles/client.dir/client/drawThread.c.o CMakeFiles/client.dir/client/inputThread.c.o -o client 

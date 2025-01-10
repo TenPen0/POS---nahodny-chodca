@@ -4,11 +4,14 @@
 
 #include "server.h"
 
+#include <pthread.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+
+#include "simThread.h"
 #include "../shm/names.h"
 #include "../shm/synBuffer.h"
 #include "simulation.h"
@@ -51,7 +54,7 @@ void moveRight(coordinates * initialCoor, coordinates * currentCoor, tile (* til
     (*tiles)[initialCoor->x][initialCoor->y].steps++;
 }
 
-void runTile(simulationData * simData, coordinates *initialCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT]) {
+void runTileSummary(simulationData * simData, coordinates *initialCoor, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT]) {
     coordinates currentCoor = {initialCoor->x, initialCoor->y};
     for (int i = 0; i < simData->maxSteps; i++) {
         int direction = rand() % 100;
@@ -77,7 +80,9 @@ void runTile(simulationData * simData, coordinates *initialCoor, tile (* tiles)[
 void runTileInteractive(simulationData * simData, simulationState * simState, coordinates *initialCoor, synSimBuffer * simBuff, synInputBuffer * inputBuff) {
     simState->currentCoor = *initialCoor;
     for (int i = 0; i < simData->maxSteps; i++) {
-        syn_shm_input_buffer_read(inputBuff, &simState->mode);
+        if (syn_shm_input_buffer_is_available(inputBuff)) {
+            syn_shm_input_buffer_pop(inputBuff, &simState->mode);
+        }
         int direction = rand() % 100;
         if (direction < simData->up) {
             moveUp(initialCoor, &simState->currentCoor, &simState->tiles);
@@ -89,7 +94,9 @@ void runTileInteractive(simulationData * simData, simulationState * simState, co
             moveRight(initialCoor, &simState->currentCoor, &simState->tiles, simData);
         }
 
-        syn_shm_input_buffer_read(inputBuff, &simState->mode);
+        if (syn_shm_input_buffer_is_available(inputBuff)) {
+            syn_shm_input_buffer_pop(inputBuff, &simState->mode);
+        }
         if (simState->mode == interactive) {
             if (checkCenter(simData, &simState->currentCoor)) {
                 simState->tiles[initialCoor->x][initialCoor->y].successfull++;
@@ -97,7 +104,7 @@ void runTileInteractive(simulationData * simData, simulationState * simState, co
                 return;
             }
             syn_shm_sim_buffer_push(simBuff, simState);
-            usleep(200000);
+            usleep(400000);
         } else {
             if (checkCenter(simData, &simState->currentCoor)) {
                 simState->tiles[initialCoor->x][initialCoor->y].successfull++;
@@ -109,13 +116,32 @@ void runTileInteractive(simulationData * simData, simulationState * simState, co
     simState->tiles[initialCoor->x][initialCoor->y].steps -= simData->maxSteps;
 }
 
-void runReplication(simulationData * simData, simulationState * simState, synSimBuffer * simBuff, synInputBuffer * inputBuff) {
-    simState->replication++;
-    syn_shm_input_buffer_read(inputBuff, &simState->mode);
-    if (simState->mode == average || simState->mode == probability) {
-        int threads = simData->width / 5;
-
-        for (int y = 0; y < simData->height; y++) {
+void runReplicationSummary(simulationData * simData, simulationState * simState, synSimBuffer * simBuff, synInputBuffer * inputBuff) {
+    //simState->replication++;
+    //syn_shm_input_buffer_read(inputBuff, &simState->mode);
+    /*if (syn_shm_input_buffer_is_available(inputBuff)) {
+        syn_shm_input_buffer_pop(inputBuff, &simState->mode);
+    }*/
+    //if (simState->mode == average || simState->mode == probability) {
+        int threads = (simData->width / 5) + 1;
+        int widthPerThread = simData->width / threads;
+        pthread_t id[threads];
+        simThreadData sData[threads];
+        for (int i = 0; i < threads; i++) {
+            int startColumn = widthPerThread * i;
+            int endColumn = widthPerThread * (i + 1) - 1;
+            if (i == (threads - 1)) {
+                endColumn = simData->width;
+            }
+            simTheadDataInit(&sData[i],startColumn, endColumn, simState->tiles, simData);
+            pthread_create(&id[i], NULL, simThread, &sData[i]);
+        }
+        for (int i = 0; i < threads; i++) {
+            pthread_join(id[i], NULL);
+        }
+    syn_shm_sim_buffer_push(simBuff, simState);
+    usleep(400000);
+        /*for (int y = 0; y < simData->height; y++) {
             for (int x = 0; x < simData->width; x++) {
                 if (y == simData->centerY && x == simData->centerX) {
                     continue;
@@ -123,10 +149,13 @@ void runReplication(simulationData * simData, simulationState * simState, synSim
                 coordinates initialCoor = {x,y};
                 runTile(simData, &initialCoor, &simState->tiles);
             }
+        }*/
+        /*for (int i = 0; i < threads; i++) {
+            pthread_join(id[i], NULL);
         }
         syn_shm_sim_buffer_push(simBuff, simState);
-        usleep(200000);
-    } else if (simState->mode == interactive) {
+        usleep(400000);
+    //} else if (simState->mode == interactive) {
         for (int i = 0; i < simData->height; i++) {
             for (int j = 0; j < simData->width; j++) {
                 if (i == simData->centerY && j == simData->centerX) {
@@ -135,11 +164,28 @@ void runReplication(simulationData * simData, simulationState * simState, synSim
                 coordinates initialCoor = {j, i};
                 runTileInteractive(simData, simState, &initialCoor, simBuff, inputBuff);
             }
-        }
-    } else if (simState->mode == stop) {
+        }*/
+    /*} else if (simState->mode == stop) {
         simState->ended = true;
-    }
+    }*/
 }
+
+void runReplicationInteractive(simulationData * simData, simulationState * simState,synSimBuffer * simBuff, synInputBuffer * inputBuff) {
+    syn_shm_sim_buffer_push(simBuff, simState);
+    //} else if (simState->mode == interactive) {
+    for (int i = 0; i < simData->height; i++) {
+        for (int j = 0; j < simData->width; j++) {
+            if (i == simData->centerY && j == simData->centerX) {
+                continue;
+            }
+            coordinates initialCoor = {j, i};
+            runTileInteractive(simData, simState, &initialCoor, simBuff, inputBuff);
+        }
+    }
+
+    usleep(400000);
+}
+
 
 int main(int argc, char * argv[]) {
     srand(time(NULL));
@@ -168,7 +214,19 @@ int main(int argc, char * argv[]) {
 
 
     for (int i = 0; i < simData.replications; i++) {
-        runReplication(&simData, &simState, &buff, &inputBuff);
+        simState.replication++;
+
+        if (syn_shm_input_buffer_is_available(&inputBuff)) {
+            syn_shm_input_buffer_pop(&inputBuff, &simState.mode);
+        }
+        if (simState.mode == average || simState.mode == probability) {
+            runReplicationSummary(&simData, &simState, &buff, &inputBuff);
+        } else if (simState.mode == interactive) {
+            runReplicationInteractive(&simData, &simState, &buff, &inputBuff);
+        } else if (simState.mode == stop) {
+            simState.ended = true;
+        }
+
         if (simState.ended == true) {
             break;
         }
@@ -179,11 +237,11 @@ int main(int argc, char * argv[]) {
     FILE *file = fopen(simData.filePath, "w");
     fprintf(file, "Ulozena simulacia\n");
     fprintf(file, "%d %d %d %d\n%d %d %d %d\n%d\n",
-        simData.height, simData.width, simData.replications, simState.replication,
+        simData.width, simData.height, simData.replications, simState.replication,
         simData.up, simData.down, simData.left, simData.right,
         simData.maxSteps);
-    drawBoard(simData.height, simData.width, &simState, &drawAverageTile, file);
-    drawBoard(simData.height, simData.width, &simState, &drawProbabilityTile, file);
+    drawBoard(&simData, &simState, &drawAverageTile, file);
+    drawBoard(&simData, &simState, &drawProbabilityTile, file);
     fclose(file);
 
     syn_shm_sim_buffer_close(&buff);

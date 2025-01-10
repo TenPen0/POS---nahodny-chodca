@@ -11,6 +11,7 @@ void simBuffInit(simBuffer * this) {
     this->size = 0;
     this->in = 0;
     this->out = 0;
+    //this->simState[0].mode = average;
 
     this->simState[BUFF_SIZE - 1].ended = false; //
 }
@@ -45,20 +46,29 @@ bool simBuffReadEnded(simBuffer *this) {
 }
 */
 void inputBuffInit(inputBuffer *this) {
-    this->simMode = average;
+    this->simMode[0] = average;
+    this->size = 0;
+    this->out = 0;
+    this->capacity = BUFF_SIZE;
     this->size = 0;
 }
 
 void inputBuffPush(inputBuffer *this, const simulationMode *in) {
-    this->simMode = *in;
-    this->size=1;
+    this->simMode[this->in++] = *in;
+    this->size++;
+    this->in %= this->capacity;
 }
 
 void inputBuffPop(inputBuffer *this, simulationMode *out) {
-    *out = this->simMode;
-    this->size=0;
+    *out = this->simMode[this->out++];
+    this->size--;
+    this->out %= this->capacity;
 }
 
-void inputBuffRead(inputBuffer * this, simulationMode *out) {
-    *out = this->simMode;
+bool inputBufferIsAvailable(inputBuffer *this) {
+    return this->size;
 }
+
+/*void inputBuffRead(inputBuffer * this, simulationMode *out) {
+    *out = this->simMode;
+}*/

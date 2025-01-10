@@ -6,5 +6,5 @@
 #define SERVER_H
 #include "simulation.h"
 
-void runTile(simulationData * simData, coordinates *initialCoor, tile (*tiles)[MAX_WIDTH][MAX_HEIGHT]);
+void runTileSummary(simulationData * simData, coordinates *initialCoor, tile (*tiles)[MAX_WIDTH][MAX_HEIGHT]);
 #endif //SERVER_H

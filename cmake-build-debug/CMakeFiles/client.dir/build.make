@@ -69,24 +69,10 @@ include CMakeFiles/client.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/client.dir/flags.make
 
-CMakeFiles/client.dir/main.c.o: CMakeFiles/client.dir/flags.make
-CMakeFiles/client.dir/main.c.o: /home/kucak7/semestralka/main.c
-CMakeFiles/client.dir/main.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/main.c.o -MF CMakeFiles/client.dir/main.c.o.d -o CMakeFiles/client.dir/main.c.o -c /home/kucak7/semestralka/main.c
-
-CMakeFiles/client.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/main.c > CMakeFiles/client.dir/main.c.i
-
-CMakeFiles/client.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/main.c -o CMakeFiles/client.dir/main.c.s
-
 CMakeFiles/client.dir/shm/buffer.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/shm/buffer.c.o: /home/kucak7/semestralka/shm/buffer.c
 CMakeFiles/client.dir/shm/buffer.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/client.dir/shm/buffer.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/client.dir/shm/buffer.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/shm/buffer.c.o -MF CMakeFiles/client.dir/shm/buffer.c.o.d -o CMakeFiles/client.dir/shm/buffer.c.o -c /home/kucak7/semestralka/shm/buffer.c
 
 CMakeFiles/client.dir/shm/buffer.c.i: cmake_force
@@ -100,7 +86,7 @@ CMakeFiles/client.dir/shm/buffer.c.s: cmake_force
 CMakeFiles/client.dir/shm/shm.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/shm/shm.c.o: /home/kucak7/semestralka/shm/shm.c
 CMakeFiles/client.dir/shm/shm.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/client.dir/shm/shm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/client.dir/shm/shm.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/shm/shm.c.o -MF CMakeFiles/client.dir/shm/shm.c.o.d -o CMakeFiles/client.dir/shm/shm.c.o -c /home/kucak7/semestralka/shm/shm.c
 
 CMakeFiles/client.dir/shm/shm.c.i: cmake_force
@@ -114,7 +100,7 @@ CMakeFiles/client.dir/shm/shm.c.s: cmake_force
 CMakeFiles/client.dir/shm/synBuffer.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/shm/synBuffer.c.o: /home/kucak7/semestralka/shm/synBuffer.c
 CMakeFiles/client.dir/shm/synBuffer.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/client.dir/shm/synBuffer.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/client.dir/shm/synBuffer.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/shm/synBuffer.c.o -MF CMakeFiles/client.dir/shm/synBuffer.c.o.d -o CMakeFiles/client.dir/shm/synBuffer.c.o -c /home/kucak7/semestralka/shm/synBuffer.c
 
 CMakeFiles/client.dir/shm/synBuffer.c.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/client.dir/shm/synBuffer.c.s: cmake_force
 CMakeFiles/client.dir/client/client.c.o: CMakeFiles/client.dir/flags.make
 CMakeFiles/client.dir/client/client.c.o: /home/kucak7/semestralka/client/client.c
 CMakeFiles/client.dir/client/client.c.o: CMakeFiles/client.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/client.dir/client/client.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/client.dir/client/client.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/client/client.c.o -MF CMakeFiles/client.dir/client/client.c.o.d -o CMakeFiles/client.dir/client/client.c.o -c /home/kucak7/semestralka/client/client.c
 
 CMakeFiles/client.dir/client/client.c.i: cmake_force
@@ -139,25 +125,87 @@ CMakeFiles/client.dir/client/client.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/client/client.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/client/client.c -o CMakeFiles/client.dir/client/client.c.s
 
+CMakeFiles/client.dir/shm/names.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/shm/names.c.o: /home/kucak7/semestralka/shm/names.c
+CMakeFiles/client.dir/shm/names.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/client.dir/shm/names.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/shm/names.c.o -MF CMakeFiles/client.dir/shm/names.c.o.d -o CMakeFiles/client.dir/shm/names.c.o -c /home/kucak7/semestralka/shm/names.c
+
+CMakeFiles/client.dir/shm/names.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/shm/names.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/names.c > CMakeFiles/client.dir/shm/names.c.i
+
+CMakeFiles/client.dir/shm/names.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/shm/names.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/names.c -o CMakeFiles/client.dir/shm/names.c.s
+
+CMakeFiles/client.dir/server/simulation.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/server/simulation.c.o: /home/kucak7/semestralka/server/simulation.c
+CMakeFiles/client.dir/server/simulation.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/client.dir/server/simulation.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/server/simulation.c.o -MF CMakeFiles/client.dir/server/simulation.c.o.d -o CMakeFiles/client.dir/server/simulation.c.o -c /home/kucak7/semestralka/server/simulation.c
+
+CMakeFiles/client.dir/server/simulation.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/server/simulation.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/server/simulation.c > CMakeFiles/client.dir/server/simulation.c.i
+
+CMakeFiles/client.dir/server/simulation.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/server/simulation.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/server/simulation.c -o CMakeFiles/client.dir/server/simulation.c.s
+
+CMakeFiles/client.dir/client/drawThread.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/client/drawThread.c.o: /home/kucak7/semestralka/client/drawThread.c
+CMakeFiles/client.dir/client/drawThread.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/client.dir/client/drawThread.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/client/drawThread.c.o -MF CMakeFiles/client.dir/client/drawThread.c.o.d -o CMakeFiles/client.dir/client/drawThread.c.o -c /home/kucak7/semestralka/client/drawThread.c
+
+CMakeFiles/client.dir/client/drawThread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/client/drawThread.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/client/drawThread.c > CMakeFiles/client.dir/client/drawThread.c.i
+
+CMakeFiles/client.dir/client/drawThread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/client/drawThread.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/client/drawThread.c -o CMakeFiles/client.dir/client/drawThread.c.s
+
+CMakeFiles/client.dir/client/inputThread.c.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/client/inputThread.c.o: /home/kucak7/semestralka/client/inputThread.c
+CMakeFiles/client.dir/client/inputThread.c.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/client.dir/client/inputThread.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/client.dir/client/inputThread.c.o -MF CMakeFiles/client.dir/client/inputThread.c.o.d -o CMakeFiles/client.dir/client/inputThread.c.o -c /home/kucak7/semestralka/client/inputThread.c
+
+CMakeFiles/client.dir/client/inputThread.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/client.dir/client/inputThread.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/client/inputThread.c > CMakeFiles/client.dir/client/inputThread.c.i
+
+CMakeFiles/client.dir/client/inputThread.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/client.dir/client/inputThread.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/client/inputThread.c -o CMakeFiles/client.dir/client/inputThread.c.s
+
 # Object files for target client
 client_OBJECTS = \
-"CMakeFiles/client.dir/main.c.o" \
 "CMakeFiles/client.dir/shm/buffer.c.o" \
 "CMakeFiles/client.dir/shm/shm.c.o" \
 "CMakeFiles/client.dir/shm/synBuffer.c.o" \
-"CMakeFiles/client.dir/client/client.c.o"
+"CMakeFiles/client.dir/client/client.c.o" \
+"CMakeFiles/client.dir/shm/names.c.o" \
+"CMakeFiles/client.dir/server/simulation.c.o" \
+"CMakeFiles/client.dir/client/drawThread.c.o" \
+"CMakeFiles/client.dir/client/inputThread.c.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
 
-client: CMakeFiles/client.dir/main.c.o
 client: CMakeFiles/client.dir/shm/buffer.c.o
 client: CMakeFiles/client.dir/shm/shm.c.o
 client: CMakeFiles/client.dir/shm/synBuffer.c.o
 client: CMakeFiles/client.dir/client/client.c.o
+client: CMakeFiles/client.dir/shm/names.c.o
+client: CMakeFiles/client.dir/server/simulation.c.o
+client: CMakeFiles/client.dir/client/drawThread.c.o
+client: CMakeFiles/client.dir/client/inputThread.c.o
 client: CMakeFiles/client.dir/build.make
 client: CMakeFiles/client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

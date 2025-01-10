@@ -17,7 +17,7 @@ void initSimData(simulationData* simData, char * stringData) {
         &simData->left,
         &simData->right,
         &simData->maxSteps,
-        &simData->filePath);
+        simData->filePath);
 
 
     simData->centerX = simData->width / 2;

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.YZyvQ0kuaI
+CMAKE_SOURCE_DIR = /home/kucak7/semestralka
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.YZyvQ0kuaI/cmake-build-debug
+CMAKE_BINARY_DIR = /home/kucak7/semestralka/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/POS.dir/depend.make
@@ -70,30 +70,110 @@ include CMakeFiles/POS.dir/progress.make
 include CMakeFiles/POS.dir/flags.make
 
 CMakeFiles/POS.dir/main.c.o: CMakeFiles/POS.dir/flags.make
-CMakeFiles/POS.dir/main.c.o: /tmp/tmp.YZyvQ0kuaI/main.c
+CMakeFiles/POS.dir/main.c.o: /home/kucak7/semestralka/main.c
 CMakeFiles/POS.dir/main.c.o: CMakeFiles/POS.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/POS.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/main.c.o -MF CMakeFiles/POS.dir/main.c.o.d -o CMakeFiles/POS.dir/main.c.o -c /tmp/tmp.YZyvQ0kuaI/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/POS.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/main.c.o -MF CMakeFiles/POS.dir/main.c.o.d -o CMakeFiles/POS.dir/main.c.o -c /home/kucak7/semestralka/main.c
 
 CMakeFiles/POS.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.YZyvQ0kuaI/main.c > CMakeFiles/POS.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/main.c > CMakeFiles/POS.dir/main.c.i
 
 CMakeFiles/POS.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.YZyvQ0kuaI/main.c -o CMakeFiles/POS.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/main.c -o CMakeFiles/POS.dir/main.c.s
+
+CMakeFiles/POS.dir/shm/buffer.c.o: CMakeFiles/POS.dir/flags.make
+CMakeFiles/POS.dir/shm/buffer.c.o: /home/kucak7/semestralka/shm/buffer.c
+CMakeFiles/POS.dir/shm/buffer.c.o: CMakeFiles/POS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/POS.dir/shm/buffer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/shm/buffer.c.o -MF CMakeFiles/POS.dir/shm/buffer.c.o.d -o CMakeFiles/POS.dir/shm/buffer.c.o -c /home/kucak7/semestralka/shm/buffer.c
+
+CMakeFiles/POS.dir/shm/buffer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/shm/buffer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/buffer.c > CMakeFiles/POS.dir/shm/buffer.c.i
+
+CMakeFiles/POS.dir/shm/buffer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/shm/buffer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/buffer.c -o CMakeFiles/POS.dir/shm/buffer.c.s
+
+CMakeFiles/POS.dir/shm/shm.c.o: CMakeFiles/POS.dir/flags.make
+CMakeFiles/POS.dir/shm/shm.c.o: /home/kucak7/semestralka/shm/shm.c
+CMakeFiles/POS.dir/shm/shm.c.o: CMakeFiles/POS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/POS.dir/shm/shm.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/shm/shm.c.o -MF CMakeFiles/POS.dir/shm/shm.c.o.d -o CMakeFiles/POS.dir/shm/shm.c.o -c /home/kucak7/semestralka/shm/shm.c
+
+CMakeFiles/POS.dir/shm/shm.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/shm/shm.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/shm.c > CMakeFiles/POS.dir/shm/shm.c.i
+
+CMakeFiles/POS.dir/shm/shm.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/shm/shm.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/shm.c -o CMakeFiles/POS.dir/shm/shm.c.s
+
+CMakeFiles/POS.dir/shm/synBuffer.c.o: CMakeFiles/POS.dir/flags.make
+CMakeFiles/POS.dir/shm/synBuffer.c.o: /home/kucak7/semestralka/shm/synBuffer.c
+CMakeFiles/POS.dir/shm/synBuffer.c.o: CMakeFiles/POS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/POS.dir/shm/synBuffer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/shm/synBuffer.c.o -MF CMakeFiles/POS.dir/shm/synBuffer.c.o.d -o CMakeFiles/POS.dir/shm/synBuffer.c.o -c /home/kucak7/semestralka/shm/synBuffer.c
+
+CMakeFiles/POS.dir/shm/synBuffer.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/shm/synBuffer.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/shm/synBuffer.c > CMakeFiles/POS.dir/shm/synBuffer.c.i
+
+CMakeFiles/POS.dir/shm/synBuffer.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/shm/synBuffer.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/shm/synBuffer.c -o CMakeFiles/POS.dir/shm/synBuffer.c.s
+
+CMakeFiles/POS.dir/client/client.c.o: CMakeFiles/POS.dir/flags.make
+CMakeFiles/POS.dir/client/client.c.o: /home/kucak7/semestralka/client/client.c
+CMakeFiles/POS.dir/client/client.c.o: CMakeFiles/POS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/POS.dir/client/client.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/client/client.c.o -MF CMakeFiles/POS.dir/client/client.c.o.d -o CMakeFiles/POS.dir/client/client.c.o -c /home/kucak7/semestralka/client/client.c
+
+CMakeFiles/POS.dir/client/client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/client/client.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/client/client.c > CMakeFiles/POS.dir/client/client.c.i
+
+CMakeFiles/POS.dir/client/client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/client/client.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/client/client.c -o CMakeFiles/POS.dir/client/client.c.s
+
+CMakeFiles/POS.dir/server/server.c.o: CMakeFiles/POS.dir/flags.make
+CMakeFiles/POS.dir/server/server.c.o: /home/kucak7/semestralka/server/server.c
+CMakeFiles/POS.dir/server/server.c.o: CMakeFiles/POS.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/POS.dir/server/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/POS.dir/server/server.c.o -MF CMakeFiles/POS.dir/server/server.c.o.d -o CMakeFiles/POS.dir/server/server.c.o -c /home/kucak7/semestralka/server/server.c
+
+CMakeFiles/POS.dir/server/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/POS.dir/server/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/kucak7/semestralka/server/server.c > CMakeFiles/POS.dir/server/server.c.i
+
+CMakeFiles/POS.dir/server/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/POS.dir/server/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/kucak7/semestralka/server/server.c -o CMakeFiles/POS.dir/server/server.c.s
 
 # Object files for target POS
 POS_OBJECTS = \
-"CMakeFiles/POS.dir/main.c.o"
+"CMakeFiles/POS.dir/main.c.o" \
+"CMakeFiles/POS.dir/shm/buffer.c.o" \
+"CMakeFiles/POS.dir/shm/shm.c.o" \
+"CMakeFiles/POS.dir/shm/synBuffer.c.o" \
+"CMakeFiles/POS.dir/client/client.c.o" \
+"CMakeFiles/POS.dir/server/server.c.o"
 
 # External object files for target POS
 POS_EXTERNAL_OBJECTS =
 
 POS: CMakeFiles/POS.dir/main.c.o
+POS: CMakeFiles/POS.dir/shm/buffer.c.o
+POS: CMakeFiles/POS.dir/shm/shm.c.o
+POS: CMakeFiles/POS.dir/shm/synBuffer.c.o
+POS: CMakeFiles/POS.dir/client/client.c.o
+POS: CMakeFiles/POS.dir/server/server.c.o
 POS: CMakeFiles/POS.dir/build.make
 POS: CMakeFiles/POS.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable POS"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kucak7/semestralka/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable POS"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/POS.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +185,6 @@ CMakeFiles/POS.dir/clean:
 .PHONY : CMakeFiles/POS.dir/clean
 
 CMakeFiles/POS.dir/depend:
-	cd /tmp/tmp.YZyvQ0kuaI/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.YZyvQ0kuaI /tmp/tmp.YZyvQ0kuaI /tmp/tmp.YZyvQ0kuaI/cmake-build-debug /tmp/tmp.YZyvQ0kuaI/cmake-build-debug /tmp/tmp.YZyvQ0kuaI/cmake-build-debug/CMakeFiles/POS.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kucak7/semestralka/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kucak7/semestralka /home/kucak7/semestralka /home/kucak7/semestralka/cmake-build-debug /home/kucak7/semestralka/cmake-build-debug /home/kucak7/semestralka/cmake-build-debug/CMakeFiles/POS.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/POS.dir/depend
 

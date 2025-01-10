@@ -34,22 +34,22 @@ void drawInteractiveTile(simulationState * simState, int x, int y, FILE * file) 
     }
 }
 
-void drawBoard(int width, int height, simulationState * simState, void(*drawTile)(simulationState*, int, int, FILE*), FILE * file) {
-    for (int x = 0; x < (width*5)+1; x++) {
+void drawBoard(simulationData * simData, simulationState * simState, void(*drawTile)(simulationState*, int, int, FILE*), FILE * file) {
+    for (int x = 0; x < (simData->width*5)+1; x++) {
         fprintf(file, "-");    //horne ohranicenie
     }
     fprintf(file, "\n");
-    for (int y = 0; y < height; y++) {
+    for (int y = 0; y < simData->height; y++) {
         fprintf(file, "|");    //zaciatok riadka
-        for (int x = 0; x < width; x++) {
-            if (x == (width / 2) && y == (height / 2)) {
+        for (int x = 0; x < simData->width; x++) {
+            if (x == (simData->centerX) && y == (simData->centerY)) {
                 fprintf(file, "////|");     //stred
             } else {
                 drawTile(simState, x, y, file);
             }
         }
         fprintf(file, "\n");
-        for (int x = 0; x < (width*5)+1; x++) {
+        for (int x = 0; x < (simData->width*5)+1; x++) {
             fprintf(file, "-");    //dolne ohranicenie
         }
         fprintf(file, "\n");
@@ -59,8 +59,9 @@ void drawBoard(int width, int height, simulationState * simState, void(*drawTile
     fprintf(file, "\n\n");
 }
 
-void drawThreadDataInit(drawThreadData *this, shared_names *simNames) {
+void drawThreadDataInit(drawThreadData *this, shared_names *simNames, simulationData * simData) {
     this->simNames = simNames;
+    this->simData = simData;
 }
 
 
@@ -77,12 +78,13 @@ void * drawThread(void * args) {
             printf("Simulacia skoncila. Stlac Enter pre pokracovanie.\n");
             break;
         }
+        printf("%d. replikacia\n", simState.replication);
         if (simState.mode == average) {
-            drawBoard(5,5, &simState, &drawAverageTile, stdout);
+            drawBoard(data->simData, &simState, &drawAverageTile, stdout);
         } else if (simState.mode == probability) {
-            drawBoard(5,5, &simState, &drawProbabilityTile, stdout);
+            drawBoard(data->simData, &simState, &drawProbabilityTile, stdout);
         } else if (simState.mode == interactive) {
-            drawBoard(5,5, &simState, &drawInteractiveTile, stdout);
+            drawBoard(data->simData, &simState, &drawInteractiveTile, stdout);
         }
     }
 

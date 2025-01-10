@@ -12,11 +12,12 @@
 
 typedef struct drawThreadData{
     shared_names * simNames;
+    simulationData * simData;
 } drawThreadData;
 
 void * drawThread(void * args);
-void drawThreadDataInit(drawThreadData * this, shared_names * simNames);
-void drawBoard(int height, int width, simulationState * simState, void(*drawTile)(simulationState*, int, int, FILE*), FILE * file);
+void drawThreadDataInit(drawThreadData * this, shared_names * simNames, simulationData * simData);
+void drawBoard(simulationData * simData, simulationState * simState, void(*drawTile)(simulationState*, int, int, FILE*), FILE * file);
 void drawAverageTile(simulationState * simState,int x, int y, FILE * file);
 void drawProbabilityTile(simulationState * simState, int x, int y, FILE * file);
 

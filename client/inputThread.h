@@ -18,5 +18,5 @@ void * inputThread(void * args);
 void inputThreadInit(inputThreadData * this, shared_names * inputNames, shared_names * simNames);
 //void inputThreadDestroy(inputThreadData * this);
 
-int readInt(int min, int max);
+//int readIntInputThread();
 #endif //INPUTTHREAD_H

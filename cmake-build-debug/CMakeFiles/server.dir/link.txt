@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/server.dir/server/server.c.o -o server 
+/usr/bin/cc -g CMakeFiles/server.dir/server/server.c.o CMakeFiles/server.dir/shm/buffer.c.o CMakeFiles/server.dir/shm/shm.c.o CMakeFiles/server.dir/shm/synBuffer.c.o CMakeFiles/server.dir/shm/names.c.o CMakeFiles/server.dir/server/simulation.c.o CMakeFiles/server.dir/client/drawThread.c.o CMakeFiles/server.dir/server/simThread.c.o -o server 

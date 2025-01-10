@@ -1,9 +1,6 @@
 CMakeFiles/client.dir/client/drawThread.c.o: \
  /home/kucak7/semestralka/client/drawThread.c /usr/include/stdc-predef.h \
- /home/kucak7/semestralka/client/drawThread.h \
- /home/kucak7/semestralka/client/../shm/names.h \
- /home/kucak7/semestralka/client/../server/simulation.h \
- /usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h /usr/include/stdio.h \
+ /home/kucak7/semestralka/client/drawThread.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -25,7 +22,10 @@ CMakeFiles/client.dir/client/drawThread.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /home/kucak7/semestralka/client/../shm/names.h \
+ /home/kucak7/semestralka/client/../server/simulation.h \
+ /usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h /usr/include/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h \
