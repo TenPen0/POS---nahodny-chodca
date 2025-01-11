@@ -7,218 +7,183 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void syn_shm_buffer_init(shared_names *names, sem_t **mut_pc, sem_t **sem_produce, sem_t **sem_consume) {
-    *mut_pc = sem_open(names->mut_pc_, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1);
-    if (*mut_pc == SEM_FAILED) {
+void synShmBufferInit(sharedNames *names, sem_t **mut, sem_t **semProduce, sem_t **semConsume) {
+    *mut = sem_open(names->mut, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1);
+    if (*mut == SEM_FAILED) {
         perror("Failed to create mutPC");
         exit(EXIT_FAILURE);
     }
 
-    *sem_produce = sem_open(names->sem_produce_, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, BUFF_SIZE);
-    if (*sem_produce == SEM_FAILED) {
+    *semProduce = sem_open(names->semProduce, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, BUFF_SIZE);
+    if (*semProduce == SEM_FAILED) {
         perror("Failed to create Produce");
         exit(EXIT_FAILURE);
     }
 
-    *sem_consume = sem_open(names->sem_consume_, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0);
-    if (*sem_consume == SEM_FAILED) {
+    *semConsume = sem_open(names->semConsume, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0);
+    if (*semConsume == SEM_FAILED) {
         perror("Failed to create Consume");
         exit(EXIT_FAILURE);
     }
 
 }
-void syn_shm_buffer_destroy(shared_names *names, sem_t *mut_pc, sem_t *sem_produce, sem_t *sem_consume) {
-
-    /*if (sem_unlink(names->mut_pc_) ==-1) {
-        perror("Failed to unlink mutPC");
-        exit(EXIT_FAILURE);
+void synShmBufferDestroy(sharedNames *names, sem_t *mut, sem_t *semProduce, sem_t *semConsume) {
+    if (mut != SEM_FAILED) {
+        sem_close(mut);
+        sem_unlink(names->mut);
     }
-    if (sem_unlink(names->sem_produce_) ==-1) {
-        perror("Failed to unlink produce");
-        exit(EXIT_FAILURE);
-    }
-    if (sem_unlink(names->sem_consume_) ==-1) {
-        perror("Failed to unlink consume");
-        exit(EXIT_FAILURE);
-    }*/
-    /*sem_unlink(names->sem_consume_);
-    sem_unlink(names->sem_produce_);
-    sem_unlink(names->mut_pc_);*/
-    if (mut_pc != SEM_FAILED) {
-        sem_close(mut_pc);
-        sem_unlink(names->mut_pc_);
+    if (semProduce != SEM_FAILED) {
+        sem_close(semProduce);
+        sem_unlink(names->semProduce);
     }
 
-    if (sem_produce != SEM_FAILED) {
-        sem_close(sem_produce);
-        sem_unlink(names->sem_produce_);
-    }
-
-    if (sem_consume != SEM_FAILED) {
-        sem_close(sem_consume);
-        sem_unlink(names->sem_consume_);
+    if (semConsume != SEM_FAILED) {
+        sem_close(semConsume);
+        sem_unlink(names->semConsume);
     }
 }
 
-void syn_shm_sim_buffer_open(synSimBuffer *this, shared_names *names) {
-    shm_sim_buffer_open(names, &this->buff_, &this->buff_fd_);
+void synShmSimBufferOpen(synSimBuffer *this, sharedNames *names) {
+    shmSimBufferOpen(names, &this->buff, &this->buffFD);
 
-    this->mut_pc_ = sem_open(names->mut_pc_, O_RDWR);
-    if (this->mut_pc_ == SEM_FAILED) {
+    this->mut = sem_open(names->mut, O_RDWR);
+    if (this->mut == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
-    this->sem_consume_ = sem_open(names->sem_consume_, O_RDWR);
-    if (this->sem_consume_ == SEM_FAILED) {
+    this->semConsume = sem_open(names->semConsume, O_RDWR);
+    if (this->semConsume == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
-    this->sem_produce_ = sem_open(names->sem_produce_, O_RDWR);
-    if ( this->sem_produce_ == SEM_FAILED) {
+    this->semProduce = sem_open(names->semProduce, O_RDWR);
+    if ( this->semProduce == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
 }
-void syn_shm_sim_buffer_close(synSimBuffer *this) {
-    shm_sim_buffer_close(this->buff_fd_,this->buff_);
+void synShmSimBufferClose(synSimBuffer *this) {
+    shmSimBufferClose(this->buffFD,this->buff);
 
-    if (sem_close(this->mut_pc_) ==-1) {
+    if (sem_close(this->mut) ==-1) {
         perror("Failed to close mutPC");
         exit(EXIT_FAILURE);
     }
-    if (sem_close(this->sem_consume_) ==-1) {
+    if (sem_close(this->semConsume) ==-1) {
         perror("Failed to close consume");
         exit(EXIT_FAILURE);
     }
-    if (sem_close(this->sem_produce_) ==-1) {
+    if (sem_close(this->semProduce) ==-1) {
         perror("Failed to close produce");
         exit(EXIT_FAILURE);
     }
-    /*sem_close(this->mut_pc_);
-    sem_close(this->sem_consume_);
-    sem_close(this->sem_produce_);*/
-}
-void syn_shm_sim_buffer_push(synSimBuffer *this, const simulationState *input) {
-    sem_wait(this->sem_produce_);
-    sem_wait(this->mut_pc_);
-    simBuffPush(this->buff_, input);
-    sem_post(this->mut_pc_);
-    sem_post(this->sem_consume_);
-}
-void syn_shm_sim_buffer_pop(synSimBuffer *this, simulationState *output) {
-    sem_wait(this->sem_consume_);
-    sem_wait(this->mut_pc_);
-    simBuffPop(this->buff_, output);
-    sem_post(this->mut_pc_);
-    sem_post(this->sem_produce_);
 }
 
-bool syn_shm_sim_buffer_read_ended(synSimBuffer *this) {
-    sem_wait(this->mut_pc_);
-    bool ended = simBuffReadEnded(this->buff_);
-    sem_post(this->mut_pc_);
+void synShmSimBufferPush(synSimBuffer *this, const simulationState *input) {
+    sem_wait(this->semProduce);
+    sem_wait(this->mut);
+    simBuffPush(this->buff, input);
+    sem_post(this->mut);
+    sem_post(this->semConsume);
+}
+
+void synShmSimBufferPop(synSimBuffer *this, simulationState *output) {
+    sem_wait(this->semConsume);
+    sem_wait(this->mut);
+    simBuffPop(this->buff, output);
+    sem_post(this->mut);
+    sem_post(this->semProduce);
+}
+
+bool synShmSimBufferReadEnded(synSimBuffer *this) {
+    sem_wait(this->mut);
+    bool ended = simBuffReadEnded(this->buff);
+    sem_post(this->mut);
     return ended;
 }
 
-void syn_shm_sum_buffer_flush(synSimBuffer *this) {
+void synShmSimBufferFlush(synSimBuffer *this) {
 
     int semVal;
-    sem_getvalue(this->sem_consume_, &semVal);
+    sem_getvalue(this->semConsume, &semVal);
     while (semVal > 0) {
         simulationState tmp;
-        syn_shm_sim_buffer_pop(this, &tmp);
-        sem_getvalue(this->sem_consume_, &semVal);
+        synShmSimBufferPop(this, &tmp);
+        sem_getvalue(this->semConsume, &semVal);
     }
-    simBuffInit(this->buff_);
+    simBuffInit(this->buff);
 }
 
-/*void syn_shm_sim_buffer_read(synSimBuffer *this, simulationState *output) {
-    sem_wait(this->mut_pc_);
-    simBuffRead(this->buff_, output);
-    sem_post(this->mut_pc_);
-}*/
+void synShmInputBufferOpen(synInputBuffer *this, sharedNames *names) {
+    shmInputBufferOpen(names, &this->buff, &this->buffFD);
 
-void syn_shm_input_buffer_open(synInputBuffer *this, shared_names *names) {
-    shm_input_buffer_open(names, &this->buff_, &this->buff_fd_);
-
-    this->mut_pc_ = sem_open(names->mut_pc_, O_RDWR);
-    if (this->mut_pc_ == SEM_FAILED) {
+    this->mut = sem_open(names->mut, O_RDWR);
+    if (this->mut == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
-    this->sem_consume_ = sem_open(names->sem_consume_, O_RDWR);
-    if (this->sem_consume_ == SEM_FAILED) {
+    this->semConsume = sem_open(names->semConsume, O_RDWR);
+    if (this->semConsume == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
-    this->sem_produce_ = sem_open(names->sem_produce_, O_RDWR);
-    if (this->sem_produce_ == SEM_FAILED) {
+    this->semProduce = sem_open(names->semProduce, O_RDWR);
+    if (this->semProduce == SEM_FAILED) {
         perror("Failed to open <NAME>");
         exit(EXIT_FAILURE);
     }
 
 }
 
-void syn_shm_input_buffer_close(synInputBuffer *this) {
-    shm_input_buffer_close(this->buff_fd_,this->buff_);
+void synShmInputBufferClose(synInputBuffer *this) {
+    shmInputBufferClose(this->buffFD,this->buff);
 
-    if (sem_close(this->mut_pc_) ==-1) {
+    if (sem_close(this->mut) ==-1) {
         perror("Failed to close mutPC");
         exit(EXIT_FAILURE);
     }
-    if (sem_close(this->sem_consume_) ==-1) {
+    if (sem_close(this->semConsume) ==-1) {
         perror("Failed to close consume");
         exit(EXIT_FAILURE);
     }
 
-    if (sem_close(this->sem_produce_) ==-1) {
+    if (sem_close(this->semProduce) ==-1) {
         perror("Failed to close consume");
         exit(EXIT_FAILURE);
     }
 }
 
-void syn_shm_input_buffer_push(synInputBuffer *this, const simulationMode *input) {
-    sem_wait(this->sem_produce_);
-    sem_wait(this->mut_pc_);
-    /*if (this->buff_->size >= 1) {       //ak sa v bufferi nachadzala hodnota, prepise sa a postne semafor consume
-        inputBuffPush(this->buff_, input);
-        sem_post(this->mut_pc_);
-    } else {*/
-        inputBuffPush(this->buff_, input);
-        sem_post(this->mut_pc_);
-        sem_post(this->sem_consume_);
-    //}
+void synShmInputBufferPush(synInputBuffer *this, const simulationMode *input) {
+    sem_wait(this->semProduce);
+    sem_wait(this->mut);
+    inputBuffPush(this->buff, input);
+    sem_post(this->mut);
+    sem_post(this->semConsume);
 }
 
-void syn_shm_input_buffer_pop(synInputBuffer *this, simulationMode *output) {
-    sem_wait(this->sem_consume_);
-    sem_wait(this->mut_pc_);
-    inputBuffPop(this->buff_, output);
-    sem_post(this->mut_pc_);
-    sem_post(this->sem_produce_);
+void synShmInputBufferPop(synInputBuffer *this, simulationMode *output) {
+    sem_wait(this->semConsume);
+    sem_wait(this->mut);
+    inputBuffPop(this->buff, output);
+    sem_post(this->mut);
+    sem_post(this->semProduce);
 
 }
 
-/*void syn_shm_input_buffer_read(synInputBuffer *this, simulationMode *output) {
-    sem_wait(this->mut_pc_);
-    inputBuffRead(this->buff_, output);
-    sem_post(this->mut_pc_);
-}*/
-
-bool syn_shm_input_buffer_is_available(synInputBuffer *this) {
-    sem_wait(this->mut_pc_);
-    bool available = inputBufferIsAvailable(this->buff_);
-    sem_post(this->mut_pc_);
+bool synShmInputBufferIsAvailable(synInputBuffer *this) {
+    sem_wait(this->mut);
+    bool available = inputBufferIsAvailable(this->buff);
+    sem_post(this->mut);
     return available;
 }
 
-void syn_shm_input_buffer_flush(synInputBuffer *this) {
+void synShmInputBufferFlush(synInputBuffer *this) {
     int semVal;
-    sem_getvalue(this->sem_consume_, &semVal);
+    sem_getvalue(this->semConsume, &semVal);
     while (semVal > 0) {
         simulationMode  tmp;
-        syn_shm_input_buffer_pop(this, &tmp);
-        sem_getvalue(this->sem_consume_, &semVal);
+        synShmInputBufferPop(this, &tmp);
+        sem_getvalue(this->semConsume, &semVal);
     }
 }
 

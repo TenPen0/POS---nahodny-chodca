@@ -5,13 +5,13 @@
 #ifndef NAMES_H
 #define NAMES_H
 
-typedef struct shared_names {
-    char *shm_name_;
-    char *mut_pc_;
-    char *sem_produce_;
-    char *sem_consume_;
-} shared_names;
+typedef struct sharedNames {
+    char *shmName;
+    char *mut;
+    char *semProduce;
+    char *semConsume;
+} sharedNames;
 
-char * add_suffix(const char * name, const char * suffix);
-void destroy_names(shared_names * names);
+char * addSuffix(const char * name, const char * suffix);
+void destroyNames(sharedNames * names);
 #endif //NAMES_H

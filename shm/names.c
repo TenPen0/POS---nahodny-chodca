@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char * add_suffix(const char * name, const char * suffix) {
+char * addSuffix(const char * name, const char * suffix) {
     const int name_len = strlen(name);
     const int new_len = name_len + strlen(suffix) + 2;
     char * result = calloc(new_len, sizeof(char));
@@ -16,9 +16,9 @@ char * add_suffix(const char * name, const char * suffix) {
     return result;
 }
 
-void destroy_names(shared_names * names) {
-    free(names->shm_name_);
-    free(names->mut_pc_);
-    free(names->sem_produce_);
-    free(names->sem_consume_);
+void destroyNames(sharedNames * names) {
+    free(names->shmName);
+    free(names->mut);
+    free(names->semProduce);
+    free(names->semConsume);
 }

@@ -4,25 +4,23 @@
 
 #include "drawThread.h"
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "../shm/synBuffer.h"
 
 void drawAverageTile(simulationState * simState, int x, int y, FILE * file) {
     double avg = 0;
-    if (simState->tiles[x][y].successfull != 0) {
-        avg = simState->tiles[x][y].steps / (double) simState->tiles[x][y].successfull;
+    if (simState->tiles[x][y].successfulls != 0) {
+        avg = simState->tiles[x][y].steps / (double) simState->tiles[x][y].successfulls;
     }
     if (avg < 100 )
         fprintf(file,"%4.1f|", avg);
     else
         fprintf(file, "%4.0f|", avg);
-    ;
 }
 
 void drawProbabilityTile(simulationState * simState, int x, int y, FILE * file) {
-    int probability = simState->tiles[x][y].successfull * 100 / simState->replication;
+    int probability = simState->tiles[x][y].successfulls * 100 / simState->replication;
     fprintf(file, "%3d%%|", probability);
 }
 
@@ -54,26 +52,24 @@ void drawBoard(simulationData * simData, simulationState * simState, void(*drawT
         }
         fprintf(file, "\n");
     }
-
-
     fprintf(file, "\n\n");
 }
 
-void drawThreadDataInit(drawThreadData *this, shared_names *simNames, simulationData * simData) {
+void drawThreadDataInit(drawThreadData *this, sharedNames *simNames, simulationData * simData) {
     this->simNames = simNames;
     this->simData = simData;
 }
 
-
 void * drawThread(void * args) {
     drawThreadData * data = args;
     synSimBuffer buffer;
-    syn_shm_sim_buffer_open(&buffer, data->simNames);
+    synShmSimBufferOpen(&buffer, data->simNames);
 
     simulationState simState;
 
     while (true) {
-        syn_shm_sim_buffer_pop(&buffer, &simState);
+        synShmSimBufferPop(&buffer, &simState);
+        int i;
         if (simState.ended) {
             printf("Simulacia skoncila. Stlac Enter pre pokracovanie.\n");
             break;
@@ -88,6 +84,6 @@ void * drawThread(void * args) {
         }
     }
 
-    syn_shm_sim_buffer_close(&buffer);
+    synShmSimBufferClose(&buffer);
     return NULL;
 }

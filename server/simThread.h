@@ -4,7 +4,7 @@
 
 #ifndef SIMTHREAD_H
 #define SIMTHREAD_H
-#include "simulation.h"
+#include "simulationStructs.h"
 
 typedef struct simThreadData {
     int startColumn;

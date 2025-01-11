@@ -6,43 +6,42 @@
 #define SYNBUFFER_H
 
 #include <fcntl.h>
- #include <sys/stat.h>
- #include <semaphore.h>
+#include <sys/stat.h>
+#include <semaphore.h>
 #include "shm.h"
 
 typedef struct synSimBuffer{
-    simBuffer *buff_;
-    int buff_fd_;
-    sem_t *mut_pc_;
-    sem_t *sem_produce_;
-    sem_t *sem_consume_;
+    simBuffer *buff;
+    int buffFD;
+    sem_t *mut;
+    sem_t *semProduce;
+    sem_t *semConsume;
 } synSimBuffer;
 
-void syn_shm_buffer_init(shared_names *names, sem_t **mut_pc, sem_t **sem_produce, sem_t **sem_consume);
-void syn_shm_buffer_destroy(shared_names *names, sem_t *mut_pc, sem_t *sem_produce, sem_t *sem_consume);
+void synShmBufferInit(sharedNames *names, sem_t **mut, sem_t **semProduce, sem_t **semConsume);
+void synShmBufferDestroy(sharedNames *names, sem_t *mut, sem_t *semProduce, sem_t *semConsume);
 
-void syn_shm_sim_buffer_open(synSimBuffer *this, shared_names *names);
-void syn_shm_sim_buffer_close(synSimBuffer *this);
-void syn_shm_sim_buffer_push(synSimBuffer *this, const simulationState *input);
-void syn_shm_sim_buffer_pop(synSimBuffer *this, simulationState *output);
-bool syn_shm_sim_buffer_read_ended(synSimBuffer *this);
-void syn_shm_sum_buffer_flush(synSimBuffer *this);
+void synShmSimBufferOpen(synSimBuffer *this, sharedNames *names);
+void synShmSimBufferClose(synSimBuffer *this);
+void synShmSimBufferPush(synSimBuffer *this, const simulationState *input);
+void synShmSimBufferPop(synSimBuffer *this, simulationState *output);
+bool synShmSimBufferReadEnded(synSimBuffer *this);
+void synShmSimBufferFlush(synSimBuffer *this);
 
 typedef struct synInputBuffer{
-    inputBuffer *buff_;
-    int buff_fd_;
-    sem_t *mut_pc_;
-    sem_t *sem_produce_;
-    sem_t *sem_consume_;
+    inputBuffer *buff;
+    int buffFD;
+    sem_t *mut;
+    sem_t *semProduce;
+    sem_t *semConsume;
 } synInputBuffer;
 
-void syn_shm_input_buffer_open(synInputBuffer *this, shared_names *names);
-void syn_shm_input_buffer_close(synInputBuffer *this);
-void syn_shm_input_buffer_push(synInputBuffer *this, const simulationMode *input);
-void syn_shm_input_buffer_pop(synInputBuffer *this, simulationMode *output);
-//void syn_shm_input_buffer_read(synInputBuffer *this, simulationMode *input);
-bool syn_shm_input_buffer_is_available(synInputBuffer *this);
-void syn_shm_input_buffer_flush(synInputBuffer *this);
+void synShmInputBufferOpen(synInputBuffer *this, sharedNames *names);
+void synShmInputBufferClose(synInputBuffer *this);
+void synShmInputBufferPush(synInputBuffer *this, const simulationMode *input);
+void synShmInputBufferPop(synInputBuffer *this, simulationMode *output);
+bool synShmInputBufferIsAvailable(synInputBuffer *this);
+void synShmInputBufferFlush(synInputBuffer *this);
 
 
 #endif //SYNBUFFER_H

@@ -4,15 +4,11 @@
 
 #include "buffer.h"
 
-#include <stdlib.h>
-
 void simBuffInit(simBuffer * this) {
     this->capacity = BUFF_SIZE;
     this->size = 0;
     this->in = 0;
     this->out = 0;
-    //this->simState[0].mode = average;
-
     this->simState[BUFF_SIZE - 1].ended = false; //
 }
 
@@ -28,23 +24,14 @@ void simBuffPop(simBuffer * this, simulationState * out) {
     this->out %= this->capacity;
 }
 
-void destroySimBuff(simBuffer * this){
-    //free(this->cislo);
-    //this->cislo = NULL;
-}
-
 bool simBuffReadEnded(simBuffer *this) {
-    if (this->out == 0)
+    if (this->out == 0) {
         return this->simState[this->capacity - 1].ended;
-    else {
+    } else {
         return this->simState[this->out - 1].ended;
     }
 }
 
-/*void simBuffRead(simBuffer *this, simulationState *out) {
-    *out = this->simState;
-}
-*/
 void inputBuffInit(inputBuffer *this) {
     this->simMode[0] = average;
     this->size = 0;
@@ -68,7 +55,3 @@ void inputBuffPop(inputBuffer *this, simulationMode *out) {
 bool inputBufferIsAvailable(inputBuffer *this) {
     return this->size;
 }
-
-/*void inputBuffRead(inputBuffer * this, simulationMode *out) {
-    *out = this->simMode;
-}*/

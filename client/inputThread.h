@@ -6,17 +6,13 @@
 #define INPUTTHREAD_H
 
 #include "../shm/names.h"
-#include "../shm/synBuffer.h"
-
 
 typedef struct inputThreadData {
-    shared_names * inputNames;
-    shared_names * simNames;
+    sharedNames * inputNames;
+    sharedNames * simNames;
 }inputThreadData;
 
 void * inputThread(void * args);
-void inputThreadInit(inputThreadData * this, shared_names * inputNames, shared_names * simNames);
-//void inputThreadDestroy(inputThreadData * this);
+void inputThreadInit(inputThreadData * this, sharedNames * inputNames, sharedNames * simNames);
 
-//int readIntInputThread();
 #endif //INPUTTHREAD_H

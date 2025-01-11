@@ -4,9 +4,8 @@
 
 #include "simThread.h"
 
-#include <stddef.h>
-
-#include "server.h"
+#include "simulation.h"
+#include <stdlib.h>
 
 void simTheadDataInit(simThreadData *data, int startWidth, int endWidth, tile (* tiles)[MAX_WIDTH][MAX_HEIGHT], simulationData *simData) {
     data->startColumn = startWidth;
@@ -19,7 +18,7 @@ void simTheadDataInit(simThreadData *data, int startWidth, int endWidth, tile (*
 void * simThread(void *args) {
     simThreadData *data = args;
     for (int x = data->startColumn; x <= data->endColumn; x++) {
-        for (int y = 0; y <= data->simData->height; y++) {
+        for (int y = 0; y < data->simData->height; y++) {
             coordinates initialCoor = {x, y};
             runTileSummary(data->simData, &initialCoor, data->tiles);
         }
